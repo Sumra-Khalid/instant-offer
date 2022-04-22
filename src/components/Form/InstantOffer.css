@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+    .offer-mobile {
+        flex-direction: column!important;
+    }
+  
+}
