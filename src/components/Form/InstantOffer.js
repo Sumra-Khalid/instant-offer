@@ -44,7 +44,7 @@ class InstantOffer extends Component{
         console.log('this.state.property_details', this.state.property_details);
         const property_details = this.state.property_details;
         console.log('property_details', property_details);
-        if(property_details.status.code === 0){
+        if(property_details.status && property_details.status.code === 0){
             let user_data = {
                 'area' : parseInt(inputValues.area_sq_ft),
                 'built_year' : parseInt(inputValues.built_year),
