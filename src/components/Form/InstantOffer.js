@@ -100,6 +100,7 @@ class InstantOffer extends Component{
         const config = {
             headers: {
               Authorization: `${configData.REICONTROL_API_KEY}`,
+              "Access-Control-Allow-Origin": "*",
             },
         };
 
@@ -126,7 +127,7 @@ class InstantOffer extends Component{
         // };
 
         // console.log('request data', requestOptions);
-        axios.put(`https://app.investorpo.com/apiV2/add-update-lead`, data, config);
+        axios.post(`https://app.investorpo.com/apiV2/add-update-lead`, data, config);
 
         // fetch("https://app.investorpo.com/apiV2/add-update-lead", requestOptions)
         // .then(response => response.text())
