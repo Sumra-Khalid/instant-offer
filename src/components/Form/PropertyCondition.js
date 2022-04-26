@@ -37,14 +37,15 @@ class PropertyCondition extends Component {
     render() {
         console.log('render', this.state.selected, "1");
         return (
-            <Container className="p-md-5 w-md-75 m-auto text-center">
+            <Container className="p-md-5 w-md-75 m-auto">
+                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
-                <h1 className="text-default w-md-75 m-auto p-3">Tell Us About The Current Condition Of Your Property</h1>
-                <p>Please choose the level that most accurately discribes the work that need to be done to your home to make it "buyer ready"</p>
+                <h1 className="text-default text-center w-md-75 m-auto p-3">Tell Us About The Current Condition Of Your Property</h1>
+                <p className="text-center">Please choose the level that most accurately discribes the work that need to be done to your home to make it "buyer ready"</p>
                 <Container className="p-md-5 w-sm-100 w-md-75">
                     <ul className="list-group mt-1 text-white condition-list">
                         <li className={(parseInt(this.state.selected) === 1) ? "list-group-item d-flex align-content-center bg-default text-white border-0" : "list-group-item d-flex align-content-center" }>
-                            <div className="check">
+                            <div className="check d-none">
                                 <Form.Check
                                     id="level1"
                                     type="radio"
@@ -67,7 +68,7 @@ class PropertyCondition extends Component {
                             </label>
                         </li>
                         <li className={(parseInt(this.state.selected) === 2) ? "list-group-item d-flex align-content-center bg-default text-white border-0" : "list-group-item d-flex align-content-center" }>
-                            <div className="check">
+                            <div className="check  d-none">
                                 <Form.Check
                                     id="level2"
                                     type="radio"
@@ -90,7 +91,7 @@ class PropertyCondition extends Component {
                             </label>
                         </li>
                         <li className={(parseInt(this.state.selected) === 3) ? "list-group-item d-flex align-content-center bg-default text-white border-0" : "list-group-item d-flex align-content-center" }>
-                            <div className="check">
+                            <div className="check  d-none">
                                 <Form.Check
                                     id="level3"
                                     type="radio"
@@ -113,7 +114,7 @@ class PropertyCondition extends Component {
                             </label>
                         </li>
                         <li className={(parseInt(this.state.selected) === 4) ? "list-group-item d-flex align-content-center bg-default text-white border-0" : "list-group-item d-flex align-content-center" }>
-                            <div className="check">
+                            <div className="check  d-none">
                                 <Form.Check
                                     id="level4"
                                     type="radio"

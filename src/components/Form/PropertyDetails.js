@@ -24,6 +24,7 @@ class PropertyDetails extends Component{
 
     render() {
         return( <Container className="p-md-5 w-md-75 m-auto">
+                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
                     <h1 className='text-default w-md-75 m-auto text-center p-3'>Please Confirm Your House's Property Details Below</h1>
                     <p className='text-center'>The information below was pulled from local tax records. Please enter any missing information</p>

@@ -58,10 +58,11 @@ class MultiStepForm extends Component {
     }
 
     changeStep = (changed_step) => {
-        console.log('cs', changed_step.toString());
-        this.setState({
-            step : parseInt(changed_step)
-        });
+        if (changed_step < this.state.step) {
+            this.setState({
+                step: parseInt(changed_step)
+            })
+        }
     }
 
     correctAddress = (address) => {
@@ -79,12 +80,14 @@ class MultiStepForm extends Component {
     }
 
     render(){
+        this.address();
         const { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, fullName, phoneNumber, email, city, state, zip } = this.state;
         const propertyAddress = { address };
         const propertyDetails = {area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces};
         const propertyCondition = { property_condition };
         const userDetails = { fullName, phoneNumber, email };
         const inputValues = { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, fullName, phoneNumber, email, city, state, zip } ;
+        console.log('input values ', inputValues);
         switch(step) {
             case 1:
                 return <PropertyAddress

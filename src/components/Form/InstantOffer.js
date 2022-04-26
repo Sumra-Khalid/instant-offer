@@ -93,7 +93,8 @@ class InstantOffer extends Component{
         if (this.state.property_match) {
             const instantOffer = this.InstantOffer(property_condition, this.state.property_details.property[0].assessment.market.mktlandvalue);
             return(
-                <Container className='p-md-5 w-md-75 m-auto'>
+            <Container className='p-md-5 w-md-75 m-auto'>
+                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <div className='bg-light rounded my-5 border rounded-lg p-2 p-md-5'>
                         <h1 className='text-default '>HERE'S OUR OFFER FOR YOUR HOUSE:</h1>
@@ -128,6 +129,7 @@ class InstantOffer extends Component{
         } else {
             return (
                 <Container className='p-md-5 w-md-75 m-auto'>
+                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <div className='bg-light rounded my-5 border rounded-lg p-md-5'>
                         <div className='text-center mb-5'>

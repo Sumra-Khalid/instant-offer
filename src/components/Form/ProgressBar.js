@@ -1,4 +1,6 @@
 import { Component } from "react";
+import BootstrapProgressBar from "react-bootstrap/ProgressBar";
+import { Container } from "react-bootstrap";
 import './ProgressBar.css';
 import locationIcon from './../../assets/map.png';
 import RightArrow from './../../assets/right-arrow.png';
@@ -19,6 +21,7 @@ class ProgressBar extends Component {
         super(props);
         this.state = {
             step: this.props.active,
+            progress: 20
         };
     }
 
@@ -34,55 +37,79 @@ class ProgressBar extends Component {
         this.props.changeStep(step);
     }
 
+    componentDidMount(prevProps) {
+        switch (this.state.step) {
+            case 1: 
+                this.setState({
+                    progress: 20
+                });
+                break;
+            case 2:
+                this.setState({
+                    progress: 40
+                });
+                break;
+            case 3:
+                this.setState({
+                    progress: 60
+                });
+                break;
+            case 4:
+                this.setState({
+                    progress: 80
+                });
+                break;
+            case 5:
+                this.setState({
+                    progress: 100
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+
     
     render() {
         console.log('step', this.state.step);
         return (
-            <div className="d-flex flex-col py-3 gap-3 justify-content-between progress-wrapper">
-                <div onClick={this.updateStep} data-step="1" className={(this.state.step >= 1) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
-                    <div>
-                        <img src={(this.state.step >= 1) ? greenLocationIcon : locationIcon} alt="logo" width='35' className="p-1 img-fluid" />
+            <Container>
+                <div className="d-flex flex-col py-3 gap-3 justify-content-between progress-wrapper">
+                    <div onClick={this.updateStep} data-step="1" className={(this.state.step >= 1) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
+                        <div>
+                            <img src={(this.state.step >= 1) ? greenLocationIcon : locationIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                        </div>
+                        <p className="m-2"> <strong>Confirm Address</strong></p>
                     </div>
-                    <p className="m-2"> <strong>Confirm Address</strong></p>
-                    <div className="flex-item">
-                        <img src={(this.state.step >= 2) ? greenRightArrow : RightArrow} alt="logo" width='35' className="p-1 img-fluid" />
+                    <div onClick={this.updateStep} data-step="2" className={(this.state.step >= 2) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
+                        <div>
+                            <img src={(this.state.step >= 2) ? greenHouseIcon : houseIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                        </div>
+                        <p className="m-2"> <strong>Property Details</strong></p>
                     </div>
-                </div>
-                <div onClick={this.updateStep} data-step="2" className={(this.state.step >= 2) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
-                    <div>
-                        <img src={(this.state.step >= 2) ? greenHouseIcon : houseIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                    <div onClick={this.updateStep} data-step="3" className={(this.state.step >= 3) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
+                        <div>
+                            <img src={(this.state.step >= 3) ? greenPropertyIcon : propertyIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                        </div>
+                        <p className="m-2"> <strong>Property Condition</strong></p>
                     </div>
-                    <p className="m-2"> <strong>Property Details</strong></p>
-                    <div className="flex-item">
-                        <img src={(this.state.step >= 3) ? greenRightArrow : RightArrow} alt="logo" width='35' className="p-1 img-fluid" />
+                    <div onClick={this.updateStep} data-step="4" className={(this.state.step >= 4) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
+                        <div>
+                            <img src={(this.state.step >= 4) ? greenInfoIcon : infoIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                        </div>
+                        <p className="m-2"> <strong>Personal Info</strong></p>
                     </div>
-                </div>
-                <div onClick={this.updateStep} data-step="3" className={(this.state.step >= 3) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
-                    <div>
-                        <img src={(this.state.step >= 3) ? greenPropertyIcon : propertyIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                    <div onClick={this.updateStep} data-step="5" className={(this.state.step >= 5) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
+                        <div>
+                            <img src={(this.state.step >= 5) ? greenDollarIcon : dollarIcon} alt="logo" width='35' className="p-1 img-fluid" />
+                        </div>
+                        <p className="m-2"> <strong>Instant Offer</strong></p>
                     </div>
-                    <p className="m-2"> <strong>Property Condition</strong></p>
-                    <div className="flex-item">
-                        <img src={(this.state.step >= 4) ? greenRightArrow : RightArrow} alt="logo" width='35' className="p-1 img-fluid" />
-                    </div>
-                </div>
-                <div onClick={this.updateStep} data-step="4" className={(this.state.step >= 4) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
-                    <div>
-                        <img src={(this.state.step >= 4) ? greenInfoIcon : infoIcon} alt="logo" width='35' className="p-1 img-fluid" />
-                    </div>
-                    <p className="m-2"> <strong>Personal Info</strong></p>
-                    <div className="flex-item">
-                        <img src={(this.state.step >= 5) ? greenRightArrow : RightArrow} alt="logo" width='35' className="p-1 img-fluid" />
-                    </div>
-                </div>
-                <div onClick={this.updateStep} data-step="5" className={(this.state.step >= 5) ? "d-flex text-default flex-item" : "d-flex flex-item"}>
-                    <div>
-                        <img src={(this.state.step >= 5) ? greenDollarIcon : dollarIcon} alt="logo" width='35' className="p-1 img-fluid" />
-                    </div>
-                    <p className="m-2"> <strong>Instant Offer</strong></p>
-                </div>
 
-            </div>
+                </div>
+                <BootstrapProgressBar className="mb-4" striped variant="default" now={this.state.progress} />
+            </Container>
         )
     }
 }

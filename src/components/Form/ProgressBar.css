@@ -20,11 +20,6 @@
 .progress-wrapper .d-flex {
     cursor: pointer;
 }
-.progress-bar {
-    margin-top: 20px;
-    counter-reset: container 0;
-    display: flex
-}
 
 .progress-bar li {
     position: relative;
