@@ -96,11 +96,28 @@ class PropertyAddress extends Component {
     componentDidMount() {
         this.getLocationImage(this.state.address);
         this.getMapImage(this.state.address);
+        let addr = '';
+        if (this.state.address) {
+            addr = this.state.address;
+        }
+        if (this.props.inputValues.city) {
+            addr += ', ' + this.props.inputValues.city;
+        }
+        if (this.props.inputValues.state) {
+            addr += ', ' + this.props.inputValues.state;
+        }
+        if (this.props.inputValues.zip) {
+            addr += ', ' + this.props.inputValues.zip;
+        }
+        this.setState({
+            complete_address: addr,
+        });
     }
 
     render() {
 
         return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">
+                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <Row className=''>
                         <Col sm={12} md={6} className="mb-2">
@@ -126,7 +143,7 @@ class PropertyAddress extends Component {
 
                     <div className="text-center py-5">
                         <h1>Is this the right address?</h1>
-                        <h5 className="mb-4"> {this.state.address}, {this.props.inputValues.city}, {this.props.inputValues.state}, {this.props.inputValues.zip}</h5>
+                        <h5 className="mb-4"> {this.state.complete_address}</h5>
                         <button className='button-green d-block m-auto w-sm-100 w-md-25  mb-3' onClick={this.saveAndContinue}>Yes Got it Right</button>
                         <button className='button-danger d-block m-auto w-sm-100 w-md-25  mb-3' onClick={this.handleShow}>Fix Address</button>
                     </div>

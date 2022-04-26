@@ -25,8 +25,13 @@ class UserDetails extends Component {
     render() {
         return (
             <Container className="p-md-5 p-3 w-md-75 m-auto">
+                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
-                <h1 className="text-default text-center">You're 5 Seconds Away From Your Offer!</h1>
+                <h1 className="text-default mb-3 text-center">You're 5 Seconds Away From Your Offer!</h1>
+                <div className="text-center">
+                    <h3 className="text-dark">Your Instant Offer is: </h3>
+                    <h3 className="text-default blur">$1234567</h3>
+                </div>
                 <div className="w-md-50 m-auto">
                     <Form>
                         <Form.Group className="mb-4" as={Col} controlId="full_name">
@@ -36,6 +41,7 @@ class UserDetails extends Component {
                                 defaultValue={this.props.inputValues.fullName}
                                 name="fullName"
                                 required
+                                placeholder="John Doe"
                                 onChange={this.props.handleChange}
                             />
                         </Form.Group>
@@ -45,6 +51,7 @@ class UserDetails extends Component {
                                 type="text"
                                 defaultValue={this.props.inputValues.phoneNumber}
                                 name="phoneNumber"
+                                placeholder="(201) 555 5555"
                                 required
                                 onChange={this.props.handleChange}
                             />
@@ -57,6 +64,7 @@ class UserDetails extends Component {
                                 defaultValue={this.props.inputValues.email}
                                 name="email"
                                 required
+                                placeholder="john@example.com"
                                 onChange={this.props.handleChange}
                             />
                         </Form.Group>
