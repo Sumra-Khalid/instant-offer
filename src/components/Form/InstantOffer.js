@@ -118,14 +118,14 @@ class InstantOffer extends Component{
             "campaign":""
         });
 
-        var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: data,
-        redirect: 'follow'
-        };
+        // var requestOptions = {
+        // method: 'POST',
+        // headers: myHeaders,
+        // body: data,
+        // redirect: 'follow'
+        // };
 
-        console.log('request data', requestOptions);
+        // console.log('request data', requestOptions);
         axios.put(`https://app.investorpo.com/apiV2/add-update-lead`, data, config);
 
         // fetch("https://app.investorpo.com/apiV2/add-update-lead", requestOptions)
