@@ -11,14 +11,14 @@ class MultiStepForm extends Component {
         step: 1,
         address: '',
         address2: '',
-        area_sq_ft: '',
-        partial_bathroom: '',
-        built_year: '',
-        floors: '',
-        bedrooms: '',
-        covered_parking: '',
-        full_bathroom: '',
-        carport_spaces: '',
+        area_sq_ft: 0,
+        partial_bathroom: 0,
+        built_year: 1900,
+        floors: 0,
+        bedrooms: 0,
+        covered_parking: 0,
+        full_bathroom: 0,
+        carport_spaces: 0,
         property_condition: '',
         fullName: '',
         phoneNumber: '',
@@ -74,6 +74,17 @@ class MultiStepForm extends Component {
         });
     }
 
+    updatePropertyDetails = (propertyDetails) => {
+        this.setState({
+            area_sq_ft: propertyDetails.area,
+            built_year: propertyDetails.built_year,
+            floors: propertyDetails.floors,
+            bedrooms: propertyDetails.bedrooms,
+            covered_parking: propertyDetails.covered_parking,
+            full_bathroom: propertyDetails.full_bathroom,
+        });
+    }
+
 
     componentDidMount(){
         this.address();
@@ -97,6 +108,7 @@ class MultiStepForm extends Component {
                             changeStep={this.changeStep}
                             inputValues={inputValues}
                             correctAddress={this.correctAddress}
+                            updatePropertyDetails={this.updatePropertyDetails}
                         />
             case 2:
                 return <PropertyDetails

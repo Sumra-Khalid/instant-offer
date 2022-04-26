@@ -112,6 +112,25 @@ class PropertyAddress extends Component {
         this.setState({
             complete_address: addr,
         });
+
+        // getch data from ATOM API
+        // const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
+        // console.log('headers', headers);
+        // fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail?Address1=" + this.props.inputValues.address + '&Address2="' + this.props.inputValues.city + ', ' + this.props.inputValues.state + '"', { headers })
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         let property_details = {
+        //             'area' : json.property[0].building.size.universalsize,
+        //             'built_year' : json.property[0].summary.yearbuilt,
+        //             'floors' : json.property[0].building.summary.levels,
+        //             'bedrooms' : json.property[0].building.rooms.beds,
+        //             'covered_parking' : json.property[0].building.parking.prkgSize,
+        //             'full_bathroom' : json.property[0].building.rooms.bathstotal,
+        //         };
+        //         console.log('property details', property_details);
+        //         this.props.updatePropertyDetails(property_details);
+                
+        //     })
     }
 
     render() {

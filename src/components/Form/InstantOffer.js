@@ -3,6 +3,7 @@ import { Button, Card, Container } from 'react-bootstrap';
 import ProgressBar from './ProgressBar';
 import configData from './../../config.json';
 import './InstantOffer.css';
+import axios from 'axios';
 
 class InstantOffer extends Component{
 
@@ -11,6 +12,19 @@ class InstantOffer extends Component{
         this.state = {
             step: this.props.inputValues.step,
             property_details: '',
+            formula_values: {
+                'condition_price': {
+                    "1": "12000",
+                    "2": "25000",
+                    "3": "45000",
+                    "4": "75000",
+                },
+                'percentage' : {
+                    "lt200k": "60",
+                    "btw200k400k": "70",
+                    "gt400": "75"
+                }
+            }
         } 
     }
 
@@ -27,16 +41,10 @@ class InstantOffer extends Component{
 
     componentDidMount() {
         const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, firstName, lastName, email, city, state, zip }} = this.props;
-        const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
-        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail?Address1=" + address + '&Address2="' + city + ', ' + state + '"', { headers })
-            .then((res) => res.json())
-            .then((json) => {
-                this.setState({
-                    property_details: json,
-                });
-                const verificationStatus = this.verifyPropertyDetails(this.props.inputValues);
-                
-            })
+        this.setState({
+            property_match : true
+        })
+        this.generateLeadToCRM(this.props.inputValues);
     }
 
     verifyPropertyDetails = (inputValues) => {
@@ -87,11 +95,51 @@ class InstantOffer extends Component{
         }
     }
 
+    generateLeadToCRM = (inputValues) => {
+
+        const config = {
+            headers: {
+              Authorization: `${configData.REICONTROL_API_KEY}`,
+            },
+        };
+
+        var data = JSON.stringify({
+            "first_name": inputValues.fullName,
+            "last_name": "",
+            "company":"",
+            "title":"",
+            "cell_phone": inputValues.phone,
+            "landline_phone":"",
+            "email": inputValues.email,
+            "address": inputValues.address,
+            "lead_type": "Instant Offer",
+            "next_action":"Create Lead",
+            "message":"",
+            "campaign":""
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow'
+        };
+
+        console.log('request data', requestOptions);
+        axios.put(`https://app.investorpo.com/apiV2/add-update-lead`, data, config);
+
+        // fetch("https://app.investorpo.com/apiV2/add-update-lead", requestOptions)
+        // .then(response => response.text())
+        // .then(result => console.log(result))
+        // .catch(error => console.log('error', error));
+    }
+
     render(){
+
         const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, firstName, lastName, email }} = this.props;
-        const verificationStatus = this.verifyPropertyDetails(this.props.inputValues);
         if (this.state.property_match) {
-            const instantOffer = this.InstantOffer(property_condition, this.state.property_details.property[0].assessment.market.mktlandvalue);
+            // this.state.property_details.property[0].assessment.market.mktlandvalue
+            const instantOffer = this.InstantOffer(property_condition, 250000);
             return(
             <Container className='p-md-5 w-md-75 m-auto'>
                     <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
