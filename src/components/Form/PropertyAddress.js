@@ -114,23 +114,23 @@ class PropertyAddress extends Component {
         });
 
         // getch data from ATOM API
-        // const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
-        // console.log('headers', headers);
-        // fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/attomavm/detail?Address1=" + this.props.inputValues.address + '&Address2="' + this.props.inputValues.city + ', ' + this.props.inputValues.state + '"', { headers })
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         let property_details = {
-        //             'area' : json.property[0].building.size.universalsize,
-        //             'built_year' : json.property[0].summary.yearbuilt,
-        //             'floors' : json.property[0].building.summary.levels,
-        //             'bedrooms' : json.property[0].building.rooms.beds,
-        //             'covered_parking' : json.property[0].building.parking.prkgSize,
-        //             'full_bathroom' : json.property[0].building.rooms.bathstotal,
-        //         };
-        //         console.log('property details', property_details);
-        //         this.props.updatePropertyDetails(property_details);
-                
-        //     })
+        const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
+        console.log('headers', headers);
+        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + this.props.inputValues.address + '&Address2="' + this.props.inputValues.city + ', ' + this.props.inputValues.state + '"', { headers })
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json)
+                let property_details = {
+                    'area' : json.property[0].building.size.universalsize,
+                    'built_year' : json.property[0].summary.yearbuilt,
+                    'floors' : json.property[0].building.summary.levels,
+                    'bedrooms' : json.property[0].building.rooms.beds,
+                    'covered_parking' : json.property[0].building.parking.prkgSize,
+                    'full_bathroom' : json.property[0].building.rooms.bathstotal,
+                };
+                console.log('property details', property_details);
+                this.props.updatePropertyDetails(property_details);
+            })
     }
 
     render() {
@@ -223,7 +223,7 @@ class PropertyAddress extends Component {
                                             <option value="Colorado">Colorado</option>
                                             <option value="Connecticut">Connecticut</option>
                                             <option value="Delaware">Delaware</option>
-                                            <option value="District">District Of Columbia</option>
+                                            <option value="District Of Columbia">District Of Columbia</option>
                                             <option value="Florida">Florida</option>
                                             <option value="Georgia">Georgia</option>
                                             <option value="Hawaii">Hawaii</option>
@@ -244,26 +244,26 @@ class PropertyAddress extends Component {
                                             <option value="Montana">Montana</option>
                                             <option value="Nebraska">Nebraska</option>
                                             <option value="Nevada">Nevada</option>
-                                            <option value="New">New Hampshire</option>
-                                            <option value="New">New Jersey</option>
-                                            <option value="New">New Mexico</option>
-                                            <option value="New">New York</option>
-                                            <option value="North">North Carolina</option>
-                                            <option value="North">North Dakota</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option value="New York">New York</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
                                             <option value="Ohio">Ohio</option>
                                             <option value="Oklahoma">Oklahoma</option>
                                             <option value="Oregon">Oregon</option>
                                             <option value="Pennsylvania">Pennsylvania</option>
-                                            <option value="Rhode">Rhode Island</option>
-                                            <option value="South">South Carolina</option>
-                                            <option value="South">South Dakota</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
                                             <option value="Tennessee">Tennessee</option>
                                             <option value="Texas">Texas</option>
                                             <option value="Utah">Utah</option>
                                             <option value="Vermont">Vermont</option>
                                             <option value="Virginia">Virginia</option>
                                             <option value="Washington">Washington</option>
-                                            <option value="West">West Virginia</option>
+                                            <option value="West Virginia">West Virginia</option>
                                             <option value="Wisconsin">Wisconsin</option>
                                             <option value="Wyoming">Wyoming</option>
                                         </Form.Select>

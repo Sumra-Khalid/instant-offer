@@ -4,6 +4,7 @@ import ProgressBar from './ProgressBar';
 import configData from './../../config.json';
 import './InstantOffer.css';
 import axios from 'axios';
+import Moment from 'react-moment';
 
 class InstantOffer extends Component{
 
@@ -45,6 +46,11 @@ class InstantOffer extends Component{
             property_match : true
         })
         this.generateLeadToCRM(this.props.inputValues);
+        let date = new Date();
+        date.setDate(date.getDate() + 5 );
+        this.setState({
+            validity: date
+        });
     }
 
     verifyPropertyDetails = (inputValues) => {
@@ -92,6 +98,8 @@ class InstantOffer extends Component{
             return (mktvalue * (this.state.formula_values.percentage.btw200k400k/100)) - (this.state.formula_values.condition_price[condition]);
         } else if (mktvalue > 400000) {
             return (mktvalue * (this.state.formula_values.percentage.gt400/100)) - (this.state.formula_values.condition_price[condition]);
+        } else {
+            return 0.00
         }
     }
 
@@ -136,7 +144,7 @@ class InstantOffer extends Component{
                         <h1 className='text-default '>HERE'S OUR OFFER FOR YOUR HOUSE:</h1>
                         <div className='d-flex justify-content-between w-sm-100 w-md-50 py-3 h3'>
                             <p>Offer :</p>
-                            <p className='text-default'><strong>${instantOffer}</strong></p>
+                            <p className='text-default'><strong>${parseFloat(instantOffer).toFixed(2)}</strong></p>
                         </div>
                         <div className='d-flex  justify-content-between w-sm-100 w-md-50 mt-1'>
                             <div>
@@ -145,7 +153,7 @@ class InstantOffer extends Component{
                             </div>
                             <div>
                                 <p>Valid Until</p>
-                                <p className='text-default'><strong>22 Apr, 2022</strong></p>
+                                <p className='text-default'><strong><Moment format="MMM D, YYYY" date={this.state.validity} /></strong></p>
                             </div>
                         </div>
                         <hr/>

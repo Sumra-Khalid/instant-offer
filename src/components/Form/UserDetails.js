@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import ProgressBar from './ProgressBar';
+import NumberFormat from 'react-number-format'
+
 
 
 class UserDetails extends Component {
@@ -29,8 +31,8 @@ class UserDetails extends Component {
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
                 <h1 className="text-default mb-3 text-center">You're 5 Seconds Away From Your Offer!</h1>
                 <div className="text-center">
-                    <h3 className="text-dark">Your Instant Offer is: </h3>
-                    <h3 className="text-default blur">$1234567</h3>
+                    <h2 className="text-dark">Your Instant Offer is: </h2>
+                    <h2 className="text-default">$ <span className="blur">1234567</span></h2>
                 </div>
                 <div className="w-md-50 m-auto">
                     <Form>
@@ -47,8 +49,9 @@ class UserDetails extends Component {
                         </Form.Group>
                         <Form.Group className="mb-4" as={Col} controlId="phone_number">
                             <Form.Label className="label">Phone Number</Form.Label>
-                            <Form.Control
-                                type="text"
+                            <NumberFormat 
+                                format="+1 (###) ###-####"
+                                mask="_" 
                                 defaultValue={this.props.inputValues.phoneNumber}
                                 name="phoneNumber"
                                 placeholder="(201) 555 5555"
