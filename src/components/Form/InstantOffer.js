@@ -97,13 +97,6 @@ class InstantOffer extends Component{
 
     generateLeadToCRM = (inputValues) => {
 
-        const config = {
-            headers: {
-              Authorization: `${configData.REICONTROL_API_KEY}`,
-              "Access-Control-Allow-Origin": "*",
-            },
-        };
-
         var data = JSON.stringify({
             "first_name": inputValues.fullName,
             "last_name": "",
@@ -116,23 +109,17 @@ class InstantOffer extends Component{
             "lead_type": "Instant Offer",
             "next_action":"Create Lead",
             "message":"",
-            "campaign":""
+            "campaign":"",
+            "token": `${configData.REICONTROL_API_KEY}`,
         });
 
-        // var requestOptions = {
-        // method: 'POST',
-        // headers: myHeaders,
-        // body: data,
-        // redirect: 'follow'
-        // };
-
-        // console.log('request data', requestOptions);
-        axios.post(`https://app.investorpo.com/apiV2/add-update-lead`, data, config);
-
-        // fetch("https://app.investorpo.com/apiV2/add-update-lead", requestOptions)
-        // .then(response => response.text())
-        // .then(result => console.log(result))
-        // .catch(error => console.log('error', error));
+        axios.post(`https://localhost/60-Seconds/api.php`, data)
+        .then(response => {
+            console.log('response', response);
+        })
+        .catch(error => {
+            console.log('error', error);
+        });
     }
 
     render(){
