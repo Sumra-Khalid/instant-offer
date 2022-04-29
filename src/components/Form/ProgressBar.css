@@ -92,7 +92,8 @@
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
-    color: lightgrey
+    color: lightgrey;
+    padding: 0px!important;
 }
 
 #progressbar .active {
@@ -107,6 +108,12 @@
     position: relative;
     font-weight: 400;
     text-align:center;
+}
+
+@media (max-width: 768px) {
+    #progressbar li {
+        font-size: 12px;
+    }    
 }
 
 #progressbar #address:before {
