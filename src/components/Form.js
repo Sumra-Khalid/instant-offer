@@ -4,6 +4,7 @@ import PropertyDetails from "./Form/PropertyDetails";
 import InstantOffer from "./Form/InstantOffer";
 import PropertyCondition from "./Form/PropertyCondition";
 import UserDetails from './Form/UserDetails';
+import Appointment from './Form/Appointment';
 import './Form.css';
 
 class MultiStepForm extends Component {
@@ -111,14 +112,6 @@ class MultiStepForm extends Component {
                             updatePropertyDetails={this.updatePropertyDetails}
                         />
             case 2:
-                return <PropertyDetails
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
-                        />
-            case 3:
                 return <PropertyCondition
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
@@ -126,7 +119,7 @@ class MultiStepForm extends Component {
                         changeStep={this.changeStep}
                         inputValues={inputValues}
                         />
-            case 4:
+            case 3:
                 return <UserDetails
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
@@ -134,8 +127,16 @@ class MultiStepForm extends Component {
                         changeStep={this.changeStep}
                         inputValues={inputValues}
                         />
-            case 5:
+            case 4:
                 return <InstantOffer
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange = {this.handleChange}
+                        changeStep={this.changeStep}
+                        inputValues={inputValues}
+                        />
+            case 5:
+                return <Appointment
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         handleChange = {this.handleChange}

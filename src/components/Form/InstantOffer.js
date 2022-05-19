@@ -140,8 +140,24 @@ class InstantOffer extends Component{
             <Container className='p-md-5 w-md-75 m-auto'>
                     <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
-                    <div className='bg-light rounded my-5 border rounded-lg p-2 p-md-5'>
-                        <h1 className='text-default '>HERE'S OUR OFFER FOR YOUR HOUSE:</h1>
+                    <div className='my-5 shadow border rounded p-2 p-md-5'>
+                        <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>
+                        <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+
+                        {/* <div className='d-flex justify-content-start bg-light border rounded p-3 offer-mobile'>
+                            <img src="https://constructingexcellence.org.uk/wp-content/uploads/2018/01/asset-management-icon-300x185.png" height="100" width="100" alt="cash-offer" className='img-fluid m-2'/>
+                            <div className="ms-3">
+                                <p className='text-dark font-weight-bold'><strong>Your offer range is $446k - $503k</strong></p>
+                                <p className='text-dark font-weight-bold'>Many offer increase after we see your home.</p>   
+                            </div>
+                            <a href='#' onClick={this.saveAndContinue} className='h1 ms-auto'><strong>&gt;</strong></a>
+                        </div> */}
+
+                        <div className='w-md-25 m-auto mt-5'>
+                            <Button className="bg-default border-0 py-3 w-100" onClick={this.saveAndContinue}><strong>Schedule Appointment &#10142;</strong></Button>
+                        </div> 
+
+                        {/* <h1 className='text-default '>HERE'S OUR OFFER FOR YOUR HOUSE:</h1>
                         <div className='d-flex justify-content-between w-sm-100 w-md-50 py-3 h3'>
                             <p>Offer :</p>
                             <p className='text-default'><strong>${parseFloat(instantOffer).toFixed(2)}</strong></p>
@@ -166,7 +182,7 @@ class InstantOffer extends Component{
                                     <a href="#" className='h2 ms-auto'>&gt;</a>
                                 </Card.Body>
                             </Card>
-                        </div>
+                        </div> */}
                     </div>
                 </Container>
             )

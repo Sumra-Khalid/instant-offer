@@ -77,10 +77,10 @@ class ProgressBar extends Component {
             <Container>
                 <ul id="progressbar" className="mt-4">
                     <li onClick={this.updateStep} data-step="1" className={(this.state.step >= 1) ? "active" : ""} id="address"><strong>Confirm Address</strong></li>
-                    <li onClick={this.updateStep} data-step="2" className={(this.state.step >= 2) ? "active" : ""} id="property_details"><strong>Property Details</strong></li>
-                    <li onClick={this.updateStep} data-step="3" className={(this.state.step >= 3) ? "active" : ""} id="property_condition"><strong>Property Condition</strong></li>
-                    <li onClick={this.updateStep} data-step="4" className={(this.state.step >= 4) ? "active" : ""} id="user_details"><strong>Personal Info</strong></li>
-                    <li onClick={this.updateStep} data-step="5" className={(this.state.step >= 5) ? "active" : ""} id="instant_offer"><strong>Instant Offer</strong></li>
+                    <li onClick={this.updateStep} data-step="2" className={(this.state.step >= 2) ? "active" : ""} id="property_condition"><strong>Property Condition</strong></li>
+                    <li onClick={this.updateStep} data-step="3" className={(this.state.step >= 3) ? "active" : ""} id="user_details"><strong>Personal Info</strong></li>
+                    <li onClick={this.updateStep} data-step="4" className={(this.state.step >= 4) ? "active" : ""} id="instant_offer"><strong>Instant Offer</strong></li>
+                    <li onClick={this.updateStep} data-step="5" className={(this.state.step >= 5) ? "active" : ""} id="property_details"><strong>Schedule Appointment</strong></li>
                 </ul>
             </Container>
         )

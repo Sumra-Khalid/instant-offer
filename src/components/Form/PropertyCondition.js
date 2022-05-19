@@ -138,7 +138,7 @@ class PropertyCondition extends Component {
                         </li>
                     </ul> 
                     <div className='w-md-25 m-auto mt-5'>
-                        <Button className="bg-default w-100" onClick={this.saveAndContinue}><strong>Next &#10142;</strong></Button>
+                        <Button className="bg-default border-0 w-100" onClick={this.saveAndContinue}><strong>Next &#10142;</strong></Button>
 
                     </div> 
                 </Container>

@@ -1,6 +1,30 @@
+.cash-offer {
+    font-size: 8vw;
+    font-weight: bolder;
+    
+}
+
+.gradient-text {
+    background: -webkit-gradient(to left, #2ab3ff, #150051);
+    background: linear-gradient(to left, #2ab3ff, #150051);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 @media (max-width: 768px) {
+    .cash-offer {
+        font-size: 14vw;
+        font-weight: bolder;
+        
+    }
     .offer-mobile {
         flex-direction: column!important;
     }
+
+    .offer-mobile img {
+        width: 100%;;
+    }
   
 }
+
+
