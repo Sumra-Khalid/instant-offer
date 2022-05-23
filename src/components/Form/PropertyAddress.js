@@ -22,6 +22,8 @@ class PropertyAddress extends Component {
             location_image: no_image,
             address_modal: false,
             map_image: no_image,
+            is_property: false,
+            is_address_valid: false,
         };
         
     }
@@ -44,8 +46,12 @@ class PropertyAddress extends Component {
     }
 
     saveAndContinue = (e) => {
-        e.preventDefault();
-        this.props.nextStep();
+        if (this.state.is_property) {
+            e.preventDefault();
+            this.props.nextStep();
+        } else {
+            this.props.changeStep(404);
+        }
     };
 
     getLocationImage = (addr) => {
@@ -78,13 +84,19 @@ class PropertyAddress extends Component {
             city: document.getElementById('city').value,
             state: document.getElementById('state').value,
         }
+        let addr = corrected_address.address_line_1 + ', ' + corrected_address.address_line_2 + ', ' + corrected_address.city + ', ' + corrected_address.state;
         this.setState({
-            address: corrected_address.address_line_1 + ', ' + corrected_address.address_line_2 + ', ' + corrected_address.city + ', ' + corrected_address.state
+            address: addr,
         });
         this.props.correctAddress(corrected_address);
+        this.getLocationImage(addr);
+        this.getMapImage(addr);
         this.setState({
             address_modal: false,
+            is_address_valid: true,
         });
+        window.history.replaceState(null, "Test Title", "/?phone={Phone:2}&email={Email:3}&propaddress="+corrected_address.address_line_1+"&propcity="+corrected_address.city+"&propstate="+corrected_address.state+"&propzip=");
+        this.fetchProperty(corrected_address.address_line_1, corrected_address.city, corrected_address.state);
     }
 
     updateAddress = (addr) => {
@@ -113,23 +125,44 @@ class PropertyAddress extends Component {
             complete_address: addr,
         });
 
+        if (this.props.inputValues.address && this.props.inputValues.city && this.props.inputValues.state) {
+            this.setState({
+                is_address_valid: true,
+            });
+            this.fetchProperty(this.props.inputValues.address, this.props.inputValues.city, this.props.inputValues.state);
+        } else {
+            this.setState({
+                is_address_valid: false,
+            });
+        }        
+    }
+
+    fetchProperty(address, city, state) {
         // getch data from ATOM API
         const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
-        console.log('headers', headers);
-        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + this.props.inputValues.address + '&Address2="' + this.props.inputValues.city + ', ' + this.props.inputValues.state + '"', { headers })
+        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + address + '&Address2="' + city + ', ' + state + '"', { headers })
             .then((res) => res.json())
             .then((json) => {
                 console.log(json)
-                let property_details = {
-                    'area' : json.property[0].building.size.universalsize,
-                    'built_year' : json.property[0].summary.yearbuilt,
-                    'floors' : json.property[0].building.summary.levels,
-                    'bedrooms' : json.property[0].building.rooms.beds,
-                    'covered_parking' : json.property[0].building.parking.prkgSize,
-                    'full_bathroom' : json.property[0].building.rooms.bathstotal,
-                };
-                console.log('property details', property_details);
-                this.props.updatePropertyDetails(property_details);
+                if (json.property && json.property.length > 0) {
+                    let property_details = {
+                        'area' : json.property[0].building.size.universalsize,
+                        'built_year' : json.property[0].summary.yearbuilt,
+                        'floors' : json.property[0].building.summary.levels,
+                        'bedrooms' : json.property[0].building.rooms.beds,
+                        'covered_parking' : json.property[0].building.parking.prkgSize,
+                        'full_bathroom' : json.property[0].building.rooms.bathstotal,
+                        'value' : json.property[0].avm.amount.value,
+                    };
+                    this.props.updatePropertyDetails(property_details);
+                    this.setState({
+                        is_property: true,
+                    });
+                } else {
+                    this.setState({
+                        is_property: false,
+                    });
+                }
             })
     }
 
@@ -163,7 +196,7 @@ class PropertyAddress extends Component {
                     <div className="text-center py-5">
                         <h1>Is this the right address?</h1>
                         <h5 className="mb-4"> {this.state.complete_address}</h5>
-                        <button className='button-green d-block m-auto w-sm-100 w-md-25  mb-3' onClick={this.saveAndContinue}>Yes Got it Right</button>
+                        <button className={(this.state.is_address_valid) ? 'button-green d-block m-auto w-sm-100 w-md-25  mb-3' : 'button-green bg-light text-muted border d-block m-auto w-sm-100 w-md-25  mb-3'} disabled={this.state.is_address_valid ? false : true} onClick={this.saveAndContinue}>Yes Got it Right</button>
                         <button className='button-danger d-block m-auto w-sm-100 w-md-25  mb-3' onClick={this.handleShow}>Fix Address</button>
                     </div>
 

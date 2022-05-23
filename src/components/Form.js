@@ -5,6 +5,7 @@ import InstantOffer from "./Form/InstantOffer";
 import PropertyCondition from "./Form/PropertyCondition";
 import UserDetails from './Form/UserDetails';
 import Appointment from './Form/Appointment';
+import NoProperty from './Form/NoProperty';
 import './Form.css';
 
 class MultiStepForm extends Component {
@@ -21,6 +22,7 @@ class MultiStepForm extends Component {
         full_bathroom: 0,
         carport_spaces: 0,
         property_condition: '',
+        property_details: [],
         fullName: '',
         phoneNumber: '',
         email: '',
@@ -63,6 +65,10 @@ class MultiStepForm extends Component {
             this.setState({
                 step: parseInt(changed_step)
             })
+        } else if (changed_step == 404) {
+            this.setState({
+                step: changed_step
+            })
         }
     }
 
@@ -77,12 +83,7 @@ class MultiStepForm extends Component {
 
     updatePropertyDetails = (propertyDetails) => {
         this.setState({
-            area_sq_ft: propertyDetails.area,
-            built_year: propertyDetails.built_year,
-            floors: propertyDetails.floors,
-            bedrooms: propertyDetails.bedrooms,
-            covered_parking: propertyDetails.covered_parking,
-            full_bathroom: propertyDetails.full_bathroom,
+            property_details: propertyDetails
         });
     }
 
@@ -93,13 +94,8 @@ class MultiStepForm extends Component {
 
     render(){
         this.address();
-        const { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, fullName, phoneNumber, email, city, state, zip } = this.state;
-        const propertyAddress = { address };
-        const propertyDetails = {area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces};
-        const propertyCondition = { property_condition };
-        const userDetails = { fullName, phoneNumber, email };
-        const inputValues = { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, fullName, phoneNumber, email, city, state, zip } ;
-        console.log('input values ', inputValues);
+        const { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip } = this.state;
+        const inputValues = { step, address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip } ;
         switch(step) {
             case 1:
                 return <PropertyAddress
@@ -137,6 +133,14 @@ class MultiStepForm extends Component {
                         />
             case 5:
                 return <Appointment
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange = {this.handleChange}
+                        changeStep={this.changeStep}
+                        inputValues={inputValues}
+                        />
+            case 404:
+                return <NoProperty
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         handleChange = {this.handleChange}

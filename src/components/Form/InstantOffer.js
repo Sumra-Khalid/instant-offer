@@ -90,8 +90,6 @@ class InstantOffer extends Component{
     }
     
     InstantOffer = (condition, mktvalue) => {
-        // console.log('condition', condition);
-        // console.log('mktvalue', mktvalue);
         if (mktvalue <= 200000) {
             return (mktvalue * (this.state.formula_values.percentage.lt200k/100)) - (this.state.formula_values.condition_price[condition]);
         } else if (mktvalue > 200000 && mktvalue <= 400000) {
@@ -132,81 +130,23 @@ class InstantOffer extends Component{
 
     render(){
 
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, firstName, lastName, email }} = this.props;
-        if (this.state.property_match) {
-            // this.state.property_details.property[0].assessment.market.mktlandvalue
-            const instantOffer = this.InstantOffer(property_condition, 250000);
-            return(
-            <Container className='p-md-5 w-md-75 m-auto'>
-                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
-                    <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
-                    <div className='my-5 shadow border rounded p-2 p-md-5'>
-                        <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>
-                        <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, firstName, lastName, email }} = this.props;
+        const instantOffer = this.InstantOffer(property_condition, property_details.value);
+        return(
+        <Container className='p-md-5 w-md-75 m-auto'>
+                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
+                <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
+                <div className='my-5 shadow border rounded p-2 p-md-5 text-center'>
+                    <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>
+                    <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
 
-                        {/* <div className='d-flex justify-content-start bg-light border rounded p-3 offer-mobile'>
-                            <img src="https://constructingexcellence.org.uk/wp-content/uploads/2018/01/asset-management-icon-300x185.png" height="100" width="100" alt="cash-offer" className='img-fluid m-2'/>
-                            <div className="ms-3">
-                                <p className='text-dark font-weight-bold'><strong>Your offer range is $446k - $503k</strong></p>
-                                <p className='text-dark font-weight-bold'>Many offer increase after we see your home.</p>   
-                            </div>
-                            <a href='#' onClick={this.saveAndContinue} className='h1 ms-auto'><strong>&gt;</strong></a>
-                        </div> */}
-
-                        <div className='w-md-25 m-auto mt-5'>
-                            <Button className="bg-default border-0 py-3 w-100" onClick={this.saveAndContinue}><strong>Schedule Appointment &#10142;</strong></Button>
-                        </div> 
-
-                        {/* <h1 className='text-default '>HERE'S OUR OFFER FOR YOUR HOUSE:</h1>
-                        <div className='d-flex justify-content-between w-sm-100 w-md-50 py-3 h3'>
-                            <p>Offer :</p>
-                            <p className='text-default'><strong>${parseFloat(instantOffer).toFixed(2)}</strong></p>
-                        </div>
-                        <div className='d-flex  justify-content-between w-sm-100 w-md-50 mt-1'>
-                            <div>
-                                <p>Status</p>
-                                <p className='text-default'><strong>Preliminary</strong></p>
-                            </div>
-                            <div>
-                                <p>Valid Until</p>
-                                <p className='text-default'><strong><Moment format="MMM D, YYYY" date={this.state.validity} /></strong></p>
-                            </div>
-                        </div>
-                        <hr/>
-                        <p className='h4 py-3'>To Do</p>
-                        <div>
-                            <Card>
-                                <Card.Body className='d-flex gap-3 offer-mobile'>
-                                    <h3>Show Us Your Home</h3>
-                                    <Button className='bg-light text-dark border' disabled>Due 24 April</Button>
-                                    <a href="#" className='h2 ms-auto'>&gt;</a>
-                                </Card.Body>
-                            </Card>
-                        </div> */}
+                    <div className='w-md-25 m-auto mt-5'>
+                        <Button className="bg-default border-0 py-3 w-100" onClick={this.saveAndContinue}><strong>Schedule Appointment &#10142;</strong></Button>
                     </div>
-                </Container>
-            )
-        } else {
-            return (
-                <Container className='p-md-5 w-md-75 m-auto'>
-                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
-                    <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
-                    <div className='bg-light rounded my-5 border rounded-lg p-md-5'>
-                        <div className='text-center mb-5'>
-                            <img src={require('./../../assets/no-offer.webp')} alt='logo' className='w-sm-100 w-md-25 mb-5'/>
-                            <h2 className='text-default '>We're sorry, but we're unable to make an Instant cash offer for some reason.</h2>
-                        </div>
-                        <div class="w-75 m-auto text-left text-gray">
-                            <h3>REASON 1: Not In Our Database</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-
-                            <h3>REASON 2: Not Enough Comparable Home Sales</h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                        </div>
-                    </div>
-                </Container>
-            )
-        }
+                </div>
+            </Container>
+        )
+        
     }
 }
 
