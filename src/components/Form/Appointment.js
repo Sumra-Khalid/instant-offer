@@ -12,6 +12,8 @@ import HomePrice from './../../assets/home-price.png';
 import HomeTime from './../../assets/appointment.png';
 import HomeEmail from './../../assets/home-email.png';
 import CheckList from './../../assets/checklist.png';
+import { InlineWidget } from "react-calendly";
+
 
 class InstantOffer extends Component{
 
@@ -45,9 +47,9 @@ class InstantOffer extends Component{
             <Container className='p-md-5 w-xl-75 m-auto'>
                 <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
-                <h1 className="text-default text-center w-md-75 mb-5 m-auto p-3">Schedule a video walktrough</h1>
-                <Container className="w-md-75">
-                    <Row>
+                <h1 className="gradient-text text-center w-md-75 m-auto p-3">Schedule a video walktrough</h1>
+                <Container className="">
+                    {/* <Row>
                         <Col className="border-right pe-5">
                             <ul className=" mt-1 text-dark check-list mb-5">
                                 <li className="">
@@ -57,10 +59,10 @@ class InstantOffer extends Component{
                                     You'll get a final offer in few days
                                 </li>
                             </ul>
-                            {/* <Card className="p-0 bg-light mb-5">
+                            <Card className="p-0 bg-light mb-5">
                                 <Card.Body>
                                 </Card.Body>
-                            </Card> */}
+                            </Card>
 
                             <Card className="p-0 mb-5 bb-2">
                                 <Card.Body>
@@ -76,9 +78,9 @@ class InstantOffer extends Component{
                                                 <strong>Sat, May 21 at 12:00 PM</strong>
                                             </p>
                                         </div>
-                                        {/* <div className="ms-auto rounded-circle border edit-icon-wrapper pointer">
+                                        <div className="ms-auto rounded-circle border edit-icon-wrapper pointer">
                                             <i class="edit-icon"></i>
-                                        </div> */}
+                                        </div>
                                     </div>
                                     <div className='py-3 p-2'>
                                         <p className="text-dark mb-2">
@@ -161,7 +163,8 @@ class InstantOffer extends Component{
                                 </Card.Body>
                             </Card>
                         </Col>
-                    </Row>
+                    </Row> */}
+                    <InlineWidget styles={{height: '1000px'}} url="https://calendly.com/sellmyhousefastsatx/phone-call" />
                 </Container>
             </Container>
         )

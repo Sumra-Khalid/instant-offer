@@ -21,8 +21,23 @@ class PropertyCondition extends Component {
 
     saveAndContinue = (e) => {
         e.preventDefault();
-        this.props.nextStep();
+        var validate = this.validate();
+        if (validate) {
+            document.getElementById('errorMsg').classList.remove('d-none');
+            this.props.nextStep();
+        } else {
+            // replace class
+            document.getElementById('errorMsg').classList.remove('d-none');
+        }
     };
+
+    validate = () => {
+        const { inputValues: { property_condition } } = this.props;
+        if (property_condition) {
+            return true;
+        }
+        return false;
+    }
 
     handleParentChange = (e) => {
         this.props.handleChange(e);
@@ -40,9 +55,12 @@ class PropertyCondition extends Component {
             <Container className="p-md-5 w-md-75 m-auto">
                 <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
-                <h1 className="text-default text-center w-md-75 m-auto p-3">Tell Us About The Current Condition Of Your Property</h1>
+                <h1 className="gradient-text text-center w-md-75 m-auto p-3">Tell Us About The Current Condition Of Your Property</h1>
                 <p className="text-center">Please choose the level that most accurately discribes the work that need to be done to your home to make it "buyer ready"</p>
                 <Container className="p-md-5 w-sm-100 w-md-75">
+                    <div className="text-center">
+                        <p className="text-danger d-none" id="errorMsg">Please fill out all required fields below to receive your instant offer.</p>
+                    </div>
                     <ul className="list-group mt-1 text-white condition-list">
                         <li className={(parseInt(this.state.selected) === 1) ? "list-group-item d-flex align-content-center bg-default text-white border-0" : "list-group-item d-flex align-content-center" }>
                             <div className="check d-none">
@@ -59,10 +77,10 @@ class PropertyCondition extends Component {
                                 <div className="checkbox-details">
                                     <div className="">
                                         <div className="d-flex flex-col align-items-baseline">
-                                            <strong>Level 1 - </strong> &nbsp;<h4>Touch-Up Only</h4>
+                                            <strong>Level 1 - </strong> &nbsp;<h4>Great Condition</h4>
                                         </div>
                                         
-                                        <div className="about"><small> A House that needs only cleaning, minor touch-ups, and a quick coat of paint. </small></div>
+                                        <div className="about"><small> Level one is for a house that only needs minor cleaning, minor touch-ups, and some paint. </small></div>
                                     </div>
                                 </div>
                             </label>
@@ -85,7 +103,7 @@ class PropertyCondition extends Component {
                                             <strong>Level 2 - </strong> &nbsp;<h4>Light Remodel</h4>
                                         </div>
                                         
-                                        <div className="about"><small> A House that needs only cleaning, minor touch-ups, and a quick coat of paint. </small></div>
+                                        <div className="about"><small> Level 2 is for houses that only need minor repairs, painting throughout the house, new flooring, updating fixtures, light electrical or plumbing work, and new appliances. </small></div>
                                     </div>
                                 </div>
                             </label>
@@ -108,7 +126,7 @@ class PropertyCondition extends Component {
                                             <strong>Level 3 - </strong> &nbsp;<h4>Moderate Remodel</h4>
                                         </div>
                                         
-                                        <div className="about"><small> A House that needs only cleaning, minor touch-ups, and a quick coat of paint. </small></div>
+                                        <div className="about"><small> Level 3 would include everything from level 2 and complete renovation of the kitchen, bathrooms, sheetrock repairs, window replacements, and some more expensive repairs such as a new roof, foundation repair, replacement of siding, etc. </small></div>
                                     </div>
                                 </div>
                             </label>
@@ -128,10 +146,10 @@ class PropertyCondition extends Component {
                                 <div className="checkbox-details">
                                     <div className="">
                                         <div className="d-flex flex-col align-items-baseline">
-                                            <strong>Level 4 - </strong> &nbsp;<h4>Full Remodel & Rehab</h4>
+                                            <strong>Level 4 - </strong> &nbsp;<h4>Full Remodel</h4>
                                         </div>
                                         
-                                        <div className="about"><small> A House that needs only cleaning, minor touch-ups, and a quick coat of paint. </small></div>
+                                        <div className="about"><small> Level 4 is the entire home needs to be fully renovated top to bottom, inside and out, including all mechanicals and structural repairs. </small></div>
                                     </div>
                                 </div>
                             </label>

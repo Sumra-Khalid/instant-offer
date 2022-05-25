@@ -21,23 +21,41 @@ class UserDetails extends Component {
 
     saveAndContinue = (e) => {
         e.preventDefault();
-        this.props.nextStep();
+        var validate = this.validate();
+        if (validate) {
+            document.getElementById('errorMsg').classList.remove('d-none');
+            this.props.nextStep();
+        } else {
+            // replace class
+            document.getElementById('errorMsg').classList.remove('d-none');
+        }
     };
+
+    validate = () => {
+        const { inputValues: { fullName, phoneNumber, email } } = this.props;
+        if (fullName && phoneNumber && email) {
+            return true;
+        }
+        return false;
+    }
 
     render() {
         return (
             <Container className="p-md-5 p-3 w-md-75 m-auto">
                 <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
-                <h1 className="text-default mb-3 text-center">You're 5 Seconds Away From Your Offer!</h1>
+                <h1 className="gradient-text mb-3 text-center">You're 5 Seconds Away From Your Offer!</h1>
                 <div className="text-center">
                     <h2 className="text-dark">Your Instant Offer is: </h2>
                     <h2 className="text-default">$ <span className="blur">1234567</span></h2>
                 </div>
                 <div className="w-md-50 m-auto">
+                    <div className="text-center">
+                        <p className="text-danger d-none" id="errorMsg">Please fill out all required fields below to receive your instant offer.</p>
+                    </div>
                     <Form>
                         <Form.Group className="mb-4" as={Col} controlId="full_name">
-                            <Form.Label className="label">Full Name</Form.Label>
+                            <Form.Label className="label">Full Name <strong className="text-danger">*</strong></Form.Label>
                             <Form.Control
                                 type="text"
                                 defaultValue={this.props.inputValues.fullName}
@@ -48,7 +66,7 @@ class UserDetails extends Component {
                             />
                         </Form.Group>
                         <Form.Group className="mb-4" as={Col} controlId="phone_number">
-                            <Form.Label className="label">Phone Number</Form.Label>
+                            <Form.Label className="label">Phone Number <strong className="text-danger">*</strong></Form.Label>
                             <NumberFormat 
                                 format="+1 (###) ###-####"
                                 mask="_" 
@@ -61,7 +79,7 @@ class UserDetails extends Component {
                         </Form.Group>
                         
                         <Form.Group className="mb-4" as={Col} controlId="email">
-                            <Form.Label className="label">Email Address</Form.Label>
+                            <Form.Label className="label">Email Address <strong className="text-danger">*</strong></Form.Label>
                             <Form.Control
                                 type="email"
                                 defaultValue={this.props.inputValues.email}

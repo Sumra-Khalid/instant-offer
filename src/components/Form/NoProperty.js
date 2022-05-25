@@ -45,7 +45,7 @@ class NoProperty extends Component{
                 <div className='bg-light rounded my-5 border rounded-lg p-md-5'>
                     <div className='text-center mb-5'>
                         <img src={require('./../../assets/no-offer.webp')} alt='logo' className='w-sm-100 w-md-25 mb-5'/>
-                        <h2 className='text-default '>We're sorry, but we're unable to make an Instant cash offer for some reason.</h2>
+                        <h2 className='gradient-text '>We're sorry, but we're unable to make an Instant cash offer for some reason.</h2>
                     </div>
                     <div class="w-75 m-auto text-left text-gray">
                         <h3>REASON 1: Not In Our Database</h3>

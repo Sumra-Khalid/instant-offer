@@ -24,3 +24,15 @@ input:-webkit-autofill {
     background: black;
     color: red;
 }
+
+
+.li-number {
+    font-size:35px;
+    font-weight:bold;
+    width: 70px;
+    height: 70px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgb(233, 230, 230)!important;
+}

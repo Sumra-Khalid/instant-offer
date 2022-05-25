@@ -36,7 +36,12 @@ class InstantOffer extends Component{
 
     saveAndContinue = (e) => {
         e.preventDefault();
-        this.props.nextStep();
+        var step = e.target.getAttribute('data-step');
+        if (step == 55){
+            this.props.changeStep(55);
+        } else {
+            this.props.nextStep();
+        }
     };
 
 
@@ -141,7 +146,10 @@ class InstantOffer extends Component{
                     <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
 
                     <div className='w-md-25 m-auto mt-5'>
-                        <Button className="bg-default border-0 py-3 w-100" onClick={this.saveAndContinue}><strong>Schedule Appointment &#10142;</strong></Button>
+                        <Button className="bg-default border-0 py-3 w-100" data-step="55" onClick={this.saveAndContinue}><strong data-step="55">Yes, I Accept</strong></Button>
+                    </div>
+                    <div>
+                        <button className='text-default bg-white border-0 mt-2' onClick={this.saveAndContinue}>I still have questions and would like to speak with an agent</button>
                     </div>
                 </div>
             </Container>

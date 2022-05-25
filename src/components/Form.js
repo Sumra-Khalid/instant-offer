@@ -6,6 +6,7 @@ import PropertyCondition from "./Form/PropertyCondition";
 import UserDetails from './Form/UserDetails';
 import Appointment from './Form/Appointment';
 import NoProperty from './Form/NoProperty';
+import Congratulations from './Form/Congratulations';
 import './Form.css';
 
 class MultiStepForm extends Component {
@@ -66,6 +67,10 @@ class MultiStepForm extends Component {
                 step: parseInt(changed_step)
             })
         } else if (changed_step == 404) {
+            this.setState({
+                step: changed_step
+            })
+        } else if (changed_step == 55) {
             this.setState({
                 step: changed_step
             })
@@ -141,6 +146,14 @@ class MultiStepForm extends Component {
                         />
             case 404:
                 return <NoProperty
+                        nextStep={this.nextStep}
+                        prevStep={this.prevStep}
+                        handleChange = {this.handleChange}
+                        changeStep={this.changeStep}
+                        inputValues={inputValues}
+                        />
+            case 55:
+                return <Congratulations
                         nextStep={this.nextStep}
                         prevStep={this.prevStep}
                         handleChange = {this.handleChange}
