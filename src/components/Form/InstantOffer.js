@@ -5,7 +5,7 @@ import configData from './../../config.json';
 import './InstantOffer.css';
 import axios from 'axios';
 import Moment from 'react-moment';
-import SpeedoMeter from './../../assets/speedometer.gif';
+import SpeedoMeter from './../../assets/speedometer.png';
 
 class InstantOffer extends Component{
 
@@ -145,11 +145,19 @@ class InstantOffer extends Component{
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                 <div className='my-5 shadow border rounded p-2 p-md-5 text-center'>
                     <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>
-                    <div className='sm-img'>
-                        <img src={SpeedoMeter} className='img-fluid' alt='preliminary-offer'/>
-                    </div>
                     <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-
+                    <Card className='bg-light p-2 w-sm-100 w-md-75 m-auto'>
+                        <div className='d-flex'>
+                            <img src={SpeedoMeter} height="65" className='' alt='preliminary-offer'/>
+                            <p className='text-center text-dark px-4 pt-3'>
+                                <strong>
+                                    Many offer increase after we see your home. 
+                                </strong>
+                            </p>
+                        </div>
+                    </Card>
+                    <div className='sm-img'>
+                    </div>
                     <div className='w-md-25 m-auto mt-5'>
                         <Button className="bg-default border-0 py-3 w-100" data-step="55" onClick={this.saveAndContinue}><strong data-step="55">Yes, I Accept</strong></Button>
                     </div>
