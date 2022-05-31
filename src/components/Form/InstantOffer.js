@@ -5,6 +5,7 @@ import configData from './../../config.json';
 import './InstantOffer.css';
 import axios from 'axios';
 import Moment from 'react-moment';
+import SpeedoMeter from './../../assets/speedometer.gif';
 
 class InstantOffer extends Component{
 
@@ -38,6 +39,7 @@ class InstantOffer extends Component{
         e.preventDefault();
         var step = e.target.getAttribute('data-step');
         if (step == 55){
+            window.open(configData.CALENDLY_CONTRACT_LINK, '_blank');
             this.props.changeStep(55);
         } else {
             this.props.nextStep();
@@ -143,6 +145,9 @@ class InstantOffer extends Component{
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                 <div className='my-5 shadow border rounded p-2 p-md-5 text-center'>
                     <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>
+                    <div className='sm-img'>
+                        <img src={SpeedoMeter} className='img-fluid' alt='preliminary-offer'/>
+                    </div>
                     <p className='cash-offer gradient-text text-dark'>${parseFloat(instantOffer).toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
 
                     <div className='w-md-25 m-auto mt-5'>

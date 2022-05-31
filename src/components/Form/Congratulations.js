@@ -55,7 +55,7 @@ class Congratulations extends Component{
                         <h3 className='text-secondary '>Next Steps and What to Expect</h3>
                     </div>
                     <div class="m-auto text-left text-gray">
-                        <Card className="border-0 border-bottom my-3 p-2">
+                        {/* <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">
                                     <div className="li-number rounded-circle bg-default text-center text-white p-2">1</div>
@@ -86,11 +86,11 @@ class Congratulations extends Component{
                                     
                                 </div>
                             </div>
-                        </Card>
+                        </Card> */}
                         <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">3</div>
+                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">1</div>
                                 </div>
                                 <div className="">
                                     <h4 className="text-dark mb-2">
@@ -106,7 +106,7 @@ class Congratulations extends Component{
                         <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">4</div>
+                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">2</div>
                                 </div>
                                 <div className="">
                                     <h4 className="text-dark mb-2">
@@ -122,7 +122,7 @@ class Congratulations extends Component{
                         <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">5</div>
+                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">3</div>
                                 </div>
                                 <div className="">
                                     <h4 className="text-dark mb-2">
@@ -138,7 +138,7 @@ class Congratulations extends Component{
                         <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">6</div>
+                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">4</div>
                                 </div>
                                 <div className="">
                                     <h4 className="text-dark mb-2">

@@ -11,6 +11,12 @@
     -webkit-text-fill-color: transparent;
 }
 
+.sm-img {
+    width: 150px;
+    height: auto;
+    margin: auto;
+}
+
 @media (max-width: 768px) {
     .cash-offer {
         font-size: 14vw;

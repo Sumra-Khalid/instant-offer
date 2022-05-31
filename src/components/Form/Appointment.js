@@ -47,7 +47,16 @@ class InstantOffer extends Component{
             <Container className='p-md-5 w-xl-75 m-auto'>
                 <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
-                <h1 className="gradient-text text-center w-md-75 m-auto p-3">Schedule a video walktrough</h1>
+                <h2 className='text-center'>
+                    <strong>
+                        <a href="callto:+1-888-837-8388" className="text-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-1 w-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            &nbsp;&nbsp;+1-888-837-8388
+                        </a>
+                    </strong>
+                </h2>
                 <Container className="">
                     {/* <Row>
                         <Col className="border-right pe-5">
@@ -164,7 +173,7 @@ class InstantOffer extends Component{
                             </Card>
                         </Col>
                     </Row> */}
-                    <InlineWidget styles={{height: '1000px'}} url="https://calendly.com/sellmyhousefastsatx/phone-call" />
+                    <InlineWidget styles={{height: '1000px'}} url={configData.CALENDLY_LINK} />
                 </Container>
             </Container>
         )

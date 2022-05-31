@@ -46,8 +46,8 @@ class UserDetails extends Component {
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep} />
                 <h1 className="gradient-text mb-3 text-center">You're 5 Seconds Away From Your Offer!</h1>
                 <div className="text-center">
-                    <h2 className="text-dark">Your Instant Offer is: </h2>
-                    <h2 className="text-default">$ <span className="blur">1234567</span></h2>
+                    <h2 className="text-dark text-lg">Your Instant Offer is: </h2>
+                    <h1 className="text-default text-lg">$ <span className="blur">1234567</span></h1>
                 </div>
                 <div className="w-md-50 m-auto">
                     <div className="text-center">
