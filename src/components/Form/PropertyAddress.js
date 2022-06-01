@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Button, Col, Container, Row, Modal } from 'react-bootstrap';
-import no_image from './../../assets/no-image.jpg';
+import loading from './../../assets/loading-icon.gif';
 import ProgressBar from './ProgressBar';
 import MapContainer from './Map';
 import configData from './../../config.json';
+import ReactLoading from 'react-loading';
 
 const photoStyle = {
     width: '600px',
@@ -19,9 +20,9 @@ class PropertyAddress extends Component {
         this.state = {
             address: this.props.address,
             step: this.props.inputValues.step,
-            location_image: no_image,
+            location_image: loading,
             address_modal: false,
-            map_image: no_image,
+            map_image: loading,
             is_property: false,
             is_address_valid: false,
         };
@@ -56,7 +57,7 @@ class PropertyAddress extends Component {
 
     getLocationImage = (addr) => {
         fetch("https://maps.googleapis.com/maps/api/streetview?location=" + addr + "&size=600x400&key=" + configData.GOOGLE_MAPS_API_KEY + "", {'Access-Control-Allow-Origin': '*'})
-        .then(data => {            
+        .then(data => {      
             this.setState({
                 location_image: data.url,
             });
@@ -168,7 +169,7 @@ class PropertyAddress extends Component {
 
     render() {
 
-        return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">
+        return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">           
                     <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <Row className=''>
