@@ -39,7 +39,6 @@ class InstantOffer extends Component{
         e.preventDefault();
         var step = e.target.getAttribute('data-step');
         if (step == 55){
-            window.open(configData.CALENDLY_CONTRACT_LINK, '_blank');
             this.props.changeStep(55);
         } else {
             this.props.nextStep();
@@ -151,7 +150,7 @@ class InstantOffer extends Component{
                             <img src={SpeedoMeter} height="65" className='' alt='preliminary-offer'/>
                             <p className='text-center text-dark px-4 pt-3'>
                                 <strong>
-                                    Many offer increase after we see your home. 
+                                    Many offers increase after we see your home. 
                                 </strong>
                             </p>
                         </div>
@@ -163,6 +162,7 @@ class InstantOffer extends Component{
                     </div>
                     <div>
                         <button className='text-default bg-white border-0 mt-2' onClick={this.saveAndContinue}>I still have questions and would like to speak with an agent</button>
+                        <p className='text-secondary text-sm'>* Subject to Inspection, confirmation of details and clear title.</p>
                     </div>
                 </div>
             </Container>

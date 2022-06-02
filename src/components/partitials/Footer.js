@@ -9,10 +9,9 @@ class Header extends Component {
             <div className="container">
                 <div className="d-flex flex-col justify-content-between">
                     <p>
-                        &copy; Copyright 2022 WhatsMyOffer.com. All Rights Reserved.  
+                        &copy; Copyright 2022 Sell My House Fast SA TX. All Rights Reserved.  
                     </p>
                     <p>
-                        <a href="https://www.whatsmyoffer.com/privacy-policy" className="text-white">Terms of Use</a> | 
                         <a href="https://www.sellmyhousefastsatx.com/privacy/" className="text-white"> Privacy Policy</a>
                     </p>
                 </div>

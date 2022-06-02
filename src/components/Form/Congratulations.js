@@ -6,6 +6,7 @@ import './InstantOffer.css';
 import axios from 'axios';
 import HomeArrow from './../../assets/tick-12345.png';
 import Moment from 'react-moment';
+import { InlineWidget } from "react-calendly";
 
 class Congratulations extends Component{
 
@@ -54,6 +55,7 @@ class Congratulations extends Component{
                     <div className='text-center mb-5'>
                         <h3 className='text-secondary '>Next Steps and What to Expect</h3>
                     </div>
+                    <InlineWidget styles={{height: '1000px'}} url={configData.CALENDLY_CONTRACT_LINK} />
                     <div class="m-auto text-left text-gray">
                         {/* <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
@@ -129,7 +131,7 @@ class Congratulations extends Component{
                                         Closing
                                     </h4>
                                     <p className="mb-0 text-secondary">
-                                        Once the title company has completed the title examination, and cleared any issues that may have been discovered during that research, we will schedule the closing where all parties sign the documents necessary to transfer ownership of the property from you to WhatsMyOffer.com. We send a mobile notary to you to sign all the closing documents.
+                                        Once the title company has completed the title examination, and cleared any issues that may have been discovered during that research, we will schedule the closing where all parties sign the documents necessary to transfer ownership of the property from you to Sell My House Fast SA TX. We send a mobile notary to you to sign all the closing documents.
                                     </p>
                                     
                                 </div>

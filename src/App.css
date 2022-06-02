@@ -145,6 +145,10 @@ input:hover, input:focus, input:active {
   font-size: 3.5em!important;
 }
 
+.text-sm {
+  font-size: 0.8em!important;
+}
+
 @media (min-width: 768px) {
   .w-md-75 {
     width: 75%!important;
