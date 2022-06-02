@@ -4,7 +4,6 @@ import loading from './../../assets/loading-icon.gif';
 import ProgressBar from './ProgressBar';
 import MapContainer from './Map';
 import configData from './../../config.json';
-import ReactLoading from 'react-loading';
 
 const photoStyle = {
     width: '600px',
