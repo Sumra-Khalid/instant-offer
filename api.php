@@ -1,22 +1,23 @@
 <?php
 
 $post_data = json_decode(file_get_contents("php://input"),true);
-if ($post_data['token'] != '') {
+// if ($post_data['token'] != '') {
 
-    $url = 'https://app.investorpo.com/apiV2/add-update-lead';
+    // $url = 'https://app.investorpo.com/apiV2/add-update-lead';
+    $url = 'https://hooks.zapier.com/hooks/catch/12569876/babnsp4/';
     $data = [
         "first_name" => $post_data['first_name'],
         "last_name" => $post_data['last_name'],
-        "cell_phone" => $post_data['landline_phone'],
+        "cell_phone" => $post_data['cell_phone'],
         "email" => $post_data['email'],
         "address" => $post_data['address'],
         "lead_type" => 'Seller',
         "next_action" => 'Create Lead',
+        "instant_offer" => $post_data['instant_offer']
     ];
     
     $headers = [
         'Content-Type: application/json',
-        'Authorization: '. $post_data['token']
     ];
     
     $curl = curl_init();
@@ -43,7 +44,7 @@ if ($post_data['token'] != '') {
     }
     
     curl_close($curl);
-} else {
-    echo "API Key is Missing";
-}
+// } else {
+//     echo "API Key is Missing";
+// }
 

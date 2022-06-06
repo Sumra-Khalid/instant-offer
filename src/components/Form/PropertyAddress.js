@@ -10,6 +10,7 @@ const photoStyle = {
     maxWidth: '100%',
     maxHeight: '400px',
     borderRadius: '10px!important',
+    border: '1px solid lightgray',
 };
 
 class PropertyAddress extends Component {
@@ -108,16 +109,7 @@ class PropertyAddress extends Component {
     componentDidMount() {
         this.getLocationImage(this.state.address);
         this.getMapImage(this.state.address);
-        let addr = '';
-        if (this.state.address) {
-            addr = this.state.address;
-        }
-        if (this.props.inputValues.city) {
-            addr += ', ' + this.props.inputValues.city;
-        }
-        if (this.props.inputValues.state) {
-            addr += ', ' + this.props.inputValues.state;
-        }
+        let addr = this.props.inputValues.address;
         if (this.props.inputValues.zip) {
             addr += ', ' + this.props.inputValues.zip;
         }

@@ -39,8 +39,8 @@ class MultiStepForm extends Component {
         this.state.city = queryParams.get('propcity');
         this.state.state = queryParams.get('propstate');
         this.state.zip = queryParams.get('propzip');
-        this.state.address = address;
-        return address;
+        this.state.address = address + ', ' + this.state.city + ', ' + this.state.state;;
+        return this.state.address;
     }
 
     nextStep = () => {

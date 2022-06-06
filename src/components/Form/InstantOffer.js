@@ -47,11 +47,12 @@ class InstantOffer extends Component{
 
 
     componentDidMount() {
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, firstName, lastName, email, city, state, zip }} = this.props;
+        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip }} = this.props;
         this.setState({
             property_match : true
         })
-        this.generateLeadToCRM(this.props.inputValues);
+        let instantOffer = this.InstantOffer(property_condition, property_details.value);
+        this.generateLeadToCRM(this.props.inputValues, instantOffer);
         let date = new Date();
         date.setDate(date.getDate() + 5 );
         this.setState({
@@ -107,25 +108,27 @@ class InstantOffer extends Component{
         }
     }
 
-    generateLeadToCRM = (inputValues) => {
-
+    generateLeadToCRM = (inputValues, instantOffer) => {
+        let firstName =  inputValues.fullName.split(' ')[0];
+        let lastName =  (inputValues.fullName.split(' ')[1]) ? inputValues.fullName.split(' ')[1] : '';
         var data = JSON.stringify({
-            "first_name": inputValues.fullName,
-            "last_name": "",
-            "company":"",
-            "title":"",
-            "cell_phone": inputValues.phone,
-            "landline_phone":"",
+            "first_name": firstName,
+            "last_name": lastName,
+            // "company":"",
+            // "title":"",
+            "cell_phone": inputValues.phoneNumber,
+            // "landline_phone":inputValues.phoneNumber,
             "email": inputValues.email,
             "address": inputValues.address,
             "lead_type": "Instant Offer",
-            "next_action":"Create Lead",
-            "message":"",
-            "campaign":"",
-            "token": `${configData.REICONTROL_API_KEY}`,
+            "instant_offer": '$' + instantOffer,
+            // "next_action":"Create Lead",
+            // "message":"",
+            // "campaign":"",
+            // "token": `${configData.REICONTROL_API_KEY}`,
         });
 
-        axios.post(`https://localhost/60-Seconds/api.php`, data)
+        axios.post(`${configData.API_URL}api.php`, data)
         .then(response => {
             console.log('response', response);
         })
@@ -136,7 +139,7 @@ class InstantOffer extends Component{
 
     render(){
 
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, firstName, lastName, email }} = this.props;
+        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip }} = this.props;
         const instantOffer = this.InstantOffer(property_condition, property_details.value);
         return(
         <Container className='p-md-5 w-md-75 m-auto'>
