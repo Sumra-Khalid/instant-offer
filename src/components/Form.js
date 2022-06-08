@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropertyAddress from "./Form/PropertyAddress";
-import PropertyDetails from "./Form/PropertyDetails";
 import InstantOffer from "./Form/InstantOffer";
 import PropertyCondition from "./Form/PropertyCondition";
 import UserDetails from './Form/UserDetails';
@@ -14,20 +13,11 @@ class MultiStepForm extends Component {
         step: 1,
         address: '',
         address2: '',
-        area_sq_ft: 0,
-        partial_bathroom: 0,
-        built_year: 1900,
-        floors: 0,
-        bedrooms: 0,
-        covered_parking: 0,
-        full_bathroom: 0,
-        carport_spaces: 0,
         property_condition: '',
         property_details: [],
         fullName: '',
         phoneNumber: '',
         email: '',
-
         city: '',
         state: '',
         zip:'',
@@ -66,11 +56,11 @@ class MultiStepForm extends Component {
             this.setState({
                 step: parseInt(changed_step)
             })
-        } else if (changed_step == 404) {
+        } else if (changed_step === 404) {
             this.setState({
                 step: changed_step
             })
-        } else if (changed_step == 55) {
+        } else if (changed_step === 55) {
             this.setState({
                 step: changed_step
             })
@@ -114,51 +104,51 @@ class MultiStepForm extends Component {
                         />
             case 2:
                 return <PropertyCondition
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             case 3:
                 return <UserDetails
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             case 4:
                 return <InstantOffer
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             case 5:
                 return <Appointment
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             case 404:
                 return <NoProperty
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             case 55:
                 return <Congratulations
-                        nextStep={this.nextStep}
-                        prevStep={this.prevStep}
-                        handleChange = {this.handleChange}
-                        changeStep={this.changeStep}
-                        inputValues={inputValues}
+                            nextStep={this.nextStep}
+                            prevStep={this.prevStep}
+                            handleChange = {this.handleChange}
+                            changeStep={this.changeStep}
+                            inputValues={inputValues}
                         />
             default:
                 return null;

@@ -2,12 +2,7 @@ import { Component } from 'react';
 import {
     Navbar,
     Nav,
-    Container,
-    NavDropdown,
-    Form,
-    FormControl,
-    Button,
-    Image
+    Container
 
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,30 +12,6 @@ class Header extends Component {
   render() {
     return (
         <>
-            {/* <Navbar bg="light" variant="light">
-                <Container>
-                    <Navbar.Brand href="/">
-                        <img
-                            alt="logo"
-                            src={logo}
-                            width="350"
-                            height=""
-                            className="d-inline-block align-top"
-                        />
-                    </Navbar.Brand>
-                    <Nav className="ml-auto">
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/how-we-buy-houses/">How It Works</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/our-company/">About Us</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/faq/">FAQ</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/we-buy-houses-in-texas/">Areas We Serve</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/we-buy-houses-in-texas/#">Who We Help</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/testimonials/">Testimonials</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/contact-us/">Contact Us</Nav.Link>
-                        <Nav.Link className="text-blue" href="https://www.sellmyhousefastsatx.com/blog/">Blog</Nav.Link>
-                    </Nav>
-                </Container>
-            </Navbar> */}
-
             <Navbar bg="light" expand="lg">
             <Container >
                 <Navbar.Brand href="/">

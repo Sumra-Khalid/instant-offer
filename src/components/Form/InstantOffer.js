@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 import ProgressBar from './ProgressBar';
 import configData from './../../config.json';
-import './InstantOffer.css';
 import axios from 'axios';
-import Moment from 'react-moment';
 import SpeedoMeter from './../../assets/speedometer.png';
+import './InstantOffer.css';
 
 class InstantOffer extends Component{
 
@@ -38,7 +37,7 @@ class InstantOffer extends Component{
     saveAndContinue = (e) => {
         e.preventDefault();
         var step = e.target.getAttribute('data-step');
-        if (step == 55){
+        if (step === 55){
             this.props.changeStep(55);
         } else {
             this.props.nextStep();
@@ -47,7 +46,7 @@ class InstantOffer extends Component{
 
 
     componentDidMount() {
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip }} = this.props;
+        const {inputValues: { property_condition, property_details }} = this.props;
         this.setState({
             property_match : true
         })
@@ -58,42 +57,6 @@ class InstantOffer extends Component{
         this.setState({
             validity: date
         });
-    }
-
-    verifyPropertyDetails = (inputValues) => {
-        console.log('inputValues', inputValues);
-        console.log('this.state.property_details', this.state.property_details);
-        const property_details = this.state.property_details;
-        console.log('property_details', property_details);
-        if(property_details.status && property_details.status.code === 0){
-            let user_data = {
-                'area' : parseInt(inputValues.area_sq_ft),
-                'built_year' : parseInt(inputValues.built_year),
-                'floors' : parseInt(inputValues.floors),
-                'bedrooms' : parseInt(inputValues.bedrooms),
-                'covered_parking' : parseInt(inputValues.covered_parking),
-                'full_bathroom' : parseInt(inputValues.full_bathroom),
-            };
-
-            console.log('user_data', user_data);
-
-            let atom_data = {
-                'area' : property_details.property[0].building.size.universalsize,
-                'built_year' : property_details.property[0].summary.yearbuilt,
-                'floors' : property_details.property[0].building.summary.levels,
-                'bedrooms' : property_details.property[0].building.rooms.beds,
-                'covered_parking' : property_details.property[0].building.parking.prkgSize,
-                'full_bathroom' : property_details.property[0].building.rooms.bathstotal,
-            };
-
-            // var equals = user_data.length === user_data.length && user_data.every((e, i) => e.area === atom_data[i].area && e.built_year === atom_data[i].built_year && e.floors === atom_data[i].floors && e.bedrooms === atom_data[i].bedrooms && e.covered_parking === atom_data[i].covered_parking && e.full_bathroom === atom_data[i].full_bathroom);
-            var equals = JSON.stringify(user_data)==JSON.stringify(atom_data);
-            this.state.property_match = equals; 
-        }
-        else{
-            
-        }
-
     }
     
     InstantOffer = (condition, mktvalue) => {
@@ -114,23 +77,26 @@ class InstantOffer extends Component{
         var data = JSON.stringify({
             "first_name": firstName,
             "last_name": lastName,
-            // "company":"",
-            // "title":"",
-            "cell_phone": inputValues.phoneNumber,
-            // "landline_phone":inputValues.phoneNumber,
             "email": inputValues.email,
-            "address": inputValues.address,
-            "lead_type": "Instant Offer",
-            "instant_offer": '$' + instantOffer,
-            // "next_action":"Create Lead",
-            // "message":"",
-            // "campaign":"",
-            // "token": `${configData.REICONTROL_API_KEY}`,
+            "cell_phone": inputValues.phoneNumber,
+            "bathrooms": inputValues.property_details.full_bathroom,
+            "bedrooms": inputValues.property_details.bedrooms,
+            "floors" : inputValues.property_details.floors,
+            "built_year":inputValues.property_details.built_year,
+            "area": inputValues.property_details.area,
+            "instant_offer": instantOffer,
+            "property_type" : inputValues.property_details.property_type,
+            "lot_size" : inputValues.property_details.lot_size,
+            "market_value" : inputValues.property_details.value,
+            "mailing_address" : inputValues.property_details.mailing_address,
+            "mailing_city" : inputValues.property_details.mailing_city,
+            "mailing_state" : inputValues.property_details.mailing_state,
+            "mailing_zip" : inputValues.property_details.mailing_zip
         });
 
-        axios.post(`${configData.API_URL}api.php`, data)
+
+        axios.post(`${configData.APP_URL}api.php`, data)
         .then(response => {
-            console.log('response', response);
         })
         .catch(error => {
             console.log('error', error);
@@ -139,11 +105,11 @@ class InstantOffer extends Component{
 
     render(){
 
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, property_details, fullName, phoneNumber, email, city, state, zip }} = this.props;
+        const {inputValues: { address, property_condition, property_details }} = this.props;
         const instantOffer = this.InstantOffer(property_condition, property_details.value);
         return(
-        <Container className='p-md-5 w-md-75 m-auto'>
-                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
+            <Container className='p-md-5 w-md-75 m-auto'>
+                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{address}</b></p>
                 <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                 <div className='my-5 shadow border rounded p-2 p-md-5 text-center'>
                     <h4 className=' text-dark gradient-text'>Preliminary Offer</h4>

@@ -1,19 +1,6 @@
 import { Component } from "react";
-import BootstrapProgressBar from "react-bootstrap/ProgressBar";
 import { Container } from "react-bootstrap";
 import './ProgressBar.css';
-import locationIcon from './../../assets/map.png';
-import RightArrow from './../../assets/right-arrow.png';
-import houseIcon from './../../assets/house.png';
-import propertyIcon from './../../assets/earthquake.png';
-import infoIcon from './../../assets/information.png';
-import dollarIcon from './../../assets/dollar-symbol.png';
-import greenLocationIcon from './../../assets/g-map.png';
-import greenRightArrow from './../../assets/g-right-arrow.png';
-import greenHouseIcon from './../../assets/g-house.png';
-import greenPropertyIcon from './../../assets/g-earthquake.png';
-import greenInfoIcon from './../../assets/g-information.png';
-import greenDollarIcon from './../../assets/g-dollar-symbol.png';
 
 class ProgressBar extends Component {
 
@@ -68,11 +55,8 @@ class ProgressBar extends Component {
                 break;
         }
     }
-
-
     
     render() {
-        console.log('step', this.state.step);
         return (
             <Container>
                 <ul id="progressbar" className="mt-4">

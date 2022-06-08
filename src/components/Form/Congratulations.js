@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Card, Container } from 'react-bootstrap';
-import ProgressBar from './ProgressBar';
+import { Card, Container } from 'react-bootstrap';
 import configData from './../../config.json';
-import './InstantOffer.css';
-import axios from 'axios';
-import HomeArrow from './../../assets/tick-12345.png';
-import Moment from 'react-moment';
 import { InlineWidget } from "react-calendly";
 
 class Congratulations extends Component{
@@ -16,7 +11,6 @@ class Congratulations extends Component{
             step: this.props.inputValues.step
             }
         } 
-    
 
     back  = (e) => {
         e.preventDefault();
@@ -33,62 +27,18 @@ class Congratulations extends Component{
         this.props.changeStep(1);
     }
 
-
-    componentDidMount() {
-        
-    }
-
     render() {
-
-        
-//  
-//  
-
-        const {inputValues: { address, area_sq_ft, partial_bathroom, built_year, floors, bedrooms, covered_parking, full_bathroom, carport_spaces, property_condition, firstName, lastName, email }} = this.props;
-
-        console.log('props', this.props);
+        const {inputValues: { address, fullName }} = this.props;
         return (
             <Container className='p-md-5 w-md-75 m-auto'>
-                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
+                <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{address}</b></p>
                 <div className='my-5'>
-                    <h2 className="gradient-text text-center m-auto p-3">{this.props.inputValues.fullName}, CONGRATULATIONS ON ACCEPTING YOUR CASH OFFER!</h2>
+                    <h2 className="gradient-text text-center m-auto p-3">{fullName}, CONGRATULATIONS ON ACCEPTING YOUR CASH OFFER!</h2>
                     <div className='text-center mb-5'>
                         <h3 className='text-secondary '>Next Steps and What to Expect</h3>
                     </div>
                     <InlineWidget styles={{height: '1000px'}} url={configData.CALENDLY_CONTRACT_LINK} />
                     <div class="m-auto text-left text-gray">
-                        {/* <Card className="border-0 border-bottom my-3 p-2">
-                            <div className="d-flex m-2 ms-0 justify-content-start gap-3">
-                                <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">1</div>
-                                </div>
-                                <div className="">
-                                    <h4 className="text-dark mb-2">
-                                        Check Your Email
-                                    </h4>
-                                    <p className="mb-0 text-secondary">
-                                        We will be emailing you an official Offer Letter with the proposed terms to purchase your home at {this.props.inputValues.address} for $60100.8. If you do not see it within 24 hours, please check your SPAM folder. Still not there, email us at info@whatsmyoffer.com
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </Card>
-                        <Card className="border-0 border-bottom my-3 p-2">
-                            <div className="d-flex m-2 ms-0 justify-content-start gap-3">
-                                <div className="">
-                                    <div className="li-number rounded-circle bg-default text-center text-white p-2">2</div>
-                                </div>
-                                <div className="">
-                                    <h4 className="text-dark mb-2">
-                                        Schedule an Inspection
-                                    </h4>
-                                    <p className="mb-0 text-secondary">
-                                        A member of our team will be reaching out to you to schedule an inspection of the property to verify its condition. If the the level of repairs you provided is not accurate, it may be necessary to adjust our offer up or down to more accurately reflect its condition and the costs to restore it to "like new" condition.
-                                    </p>
-                                    
-                                </div>
-                            </div>
-                        </Card> */}
                         <Card className="border-0 border-bottom my-3 p-2">
                             <div className="d-flex m-2 ms-0 justify-content-start gap-3">
                                 <div className="">

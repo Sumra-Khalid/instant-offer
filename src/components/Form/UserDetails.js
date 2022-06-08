@@ -1,9 +1,7 @@
 import { Component } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Col, Button, Form } from "react-bootstrap";
 import ProgressBar from './ProgressBar';
 import NumberFormat from 'react-number-format'
-
-
 
 class UserDetails extends Component {
     
@@ -26,7 +24,6 @@ class UserDetails extends Component {
             document.getElementById('errorMsg').classList.remove('d-none');
             this.props.nextStep();
         } else {
-            // replace class
             document.getElementById('errorMsg').classList.remove('d-none');
         }
     };

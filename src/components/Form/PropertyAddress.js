@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Button, Col, Container, Row, Modal } from 'react-bootstrap';
 import loading from './../../assets/loading-icon.gif';
 import ProgressBar from './ProgressBar';
-import MapContainer from './Map';
 import configData from './../../config.json';
 
 const photoStyle = {
@@ -18,7 +17,7 @@ class PropertyAddress extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            address: this.props.address,
+            complete_address: '',
             step: this.props.inputValues.step,
             location_image: loading,
             address_modal: false,
@@ -68,7 +67,6 @@ class PropertyAddress extends Component {
     getMapImage = (addr) => {
         fetch("https://maps.googleapis.com/maps/api/staticmap?markers=color%3Ared%7C" + addr + "&size=600x400&key=" + configData.GOOGLE_MAPS_API_KEY + "", {'Access-Control-Allow-Origin': '*'})
         .then(data => {
-            console.log('map image data', data);
             if (data.status === 200) {    
                 this.setState({
                     map_image: data.url,
@@ -100,16 +98,11 @@ class PropertyAddress extends Component {
         this.fetchProperty(corrected_address.address_line_1, corrected_address.city, corrected_address.state);
     }
 
-    updateAddress = (addr) => {
-        // this.setState({
-        //     address: addr,
-        // });
-    }
-
     componentDidMount() {
-        this.getLocationImage(this.state.address);
-        this.getMapImage(this.state.address);
-        let addr = this.props.inputValues.address;
+        const {inputValues: { address }} = this.props;
+        let addr = address;
+        this.getLocationImage(address);
+        this.getMapImage(address);
         if (this.props.inputValues.zip) {
             addr += ', ' + this.props.inputValues.zip;
         }
@@ -130,12 +123,10 @@ class PropertyAddress extends Component {
     }
 
     fetchProperty(address, city, state) {
-        // getch data from ATOM API
         const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
         fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + address + '&Address2="' + city + ', ' + state + '"', { headers })
             .then((res) => res.json())
             .then((json) => {
-                console.log(json)
                 if (json.property && json.property.length > 0) {
                     let property_details = {
                         'area' : json.property[0].building.size.universalsize,
@@ -145,6 +136,13 @@ class PropertyAddress extends Component {
                         'covered_parking' : json.property[0].building.parking.prkgSize,
                         'full_bathroom' : json.property[0].building.rooms.bathstotal,
                         'value' : json.property[0].avm.amount.value,
+                        'property_type' : json.property[0].summary.propclass,
+                        'lot_size' : json.property[0].lot.lotsize2,
+                        'mailing_address' : json.property[0].address.line1,
+                        'mailing_city' : json.property[0].address.locality,
+                        'mailing_state' : json.property[0].address.countrySubd,
+                        'mailing_zip' : json.property[0].address.postal1,
+
                     };
                     this.props.updatePropertyDetails(property_details);
                     this.setState({
@@ -159,9 +157,10 @@ class PropertyAddress extends Component {
     }
 
     render() {
+        const {inputValues: { address, complete_address }} = this.props;
 
         return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">           
-                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
+                    <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{complete_address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <Row className=''>
                         <Col sm={12} md={6} className="mb-2">
@@ -180,14 +179,11 @@ class PropertyAddress extends Component {
                                 style={photoStyle}
                             />
                         </Col>
-                        {/* <Col>
-                            <MapContainer address={this.state.address} className="custom" changeImageSrc={this.getLocationImage} updateAddress={this.updateAddress}/>
-                        </Col> */}
                     </Row>
 
                     <div className="text-center py-5">
                         <h1>Is this the right address?</h1>
-                        <h5 className="mb-4"> {this.state.complete_address}</h5>
+                        <h5 className="mb-4"> {complete_address}</h5>
                         <button className={(this.state.is_address_valid) ? 'button-green d-block m-auto w-sm-100 w-md-25  mb-3' : 'button-green bg-light text-muted border d-block m-auto w-sm-100 w-md-25  mb-3'} disabled={this.state.is_address_valid ? false : true} onClick={this.saveAndContinue}>Yes Got it Right</button>
                         <button className='button-danger d-block m-auto w-sm-100 w-md-25  mb-3' onClick={this.handleShow}>Fix Address</button>
                     </div>
@@ -203,7 +199,7 @@ class PropertyAddress extends Component {
                                         <Form.Label className="label">Address Line 1</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            defaultValue={this.props.address}
+                                            defaultValue={address}
                                             name="address_line_1"
                                             required
                                         />

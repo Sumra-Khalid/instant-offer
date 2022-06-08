@@ -1,11 +1,10 @@
 import { Component } from "react";
-import { Form, Button, Col, Container, Row } from 'react-bootstrap';
-import './PropertyCondition.css';
+import { Form, Button, Container } from 'react-bootstrap';
 import ProgressBar from "./ProgressBar";
+import './PropertyCondition.css';
 
 class PropertyCondition extends Component {
 
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +25,6 @@ class PropertyCondition extends Component {
             document.getElementById('errorMsg').classList.remove('d-none');
             this.props.nextStep();
         } else {
-            // replace class
             document.getElementById('errorMsg').classList.remove('d-none');
         }
     };
@@ -50,7 +48,6 @@ class PropertyCondition extends Component {
     }
 
     render() {
-        console.log('render', this.state.selected, "1");
         return (
             <Container className="p-md-5 w-md-75 m-auto">
                 <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{this.props.inputValues.address}</b></p>
