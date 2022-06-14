@@ -37,7 +37,7 @@ class InstantOffer extends Component{
     saveAndContinue = (e) => {
         e.preventDefault();
         var step = e.target.getAttribute('data-step');
-        if (step === 55){
+        if (parseInt(step) === 55){
             this.props.changeStep(55);
         } else {
             this.props.nextStep();
