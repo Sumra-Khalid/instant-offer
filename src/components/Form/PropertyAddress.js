@@ -99,8 +99,8 @@ class PropertyAddress extends Component {
     }
 
     componentDidMount() {
-        const {inputValues: { address }} = this.props;
-        let addr = address;
+        const {inputValues: { address, city, state }} = this.props;
+        let addr = address + ', ' + city + ', ' + state;
         this.getLocationImage(address);
         this.getMapImage(address);
         if (this.props.inputValues.zip) {
@@ -157,7 +157,8 @@ class PropertyAddress extends Component {
     }
 
     render() {
-        const {inputValues: { address, complete_address }} = this.props;
+        const {inputValues: { address, city, state }} = this.props;
+        let complete_address = address;
 
         return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">           
                     <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{complete_address}</b></p>

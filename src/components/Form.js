@@ -25,11 +25,10 @@ class MultiStepForm extends Component {
 
     address = () => {
         const queryParams = new URLSearchParams(window.location.search);
-        const address = queryParams.get('propaddress');
+        this.state.address = queryParams.get('propaddress');
         this.state.city = queryParams.get('propcity');
         this.state.state = queryParams.get('propstate');
         this.state.zip = queryParams.get('propzip');
-        this.state.address = address + ', ' + this.state.city + ', ' + this.state.state;;
         return this.state.address;
     }
 
