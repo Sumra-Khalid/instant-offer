@@ -81,7 +81,7 @@ class PropertyAddress extends Component {
             address_line_1: document.getElementById('address_line_1').value,
             address_line_2: document.getElementById('address_line_2').value,
             city: document.getElementById('city').value,
-            state: document.getElementById('state').value,
+            state: document.getElementById('state').value
         }
         let addr = corrected_address.address_line_1 + ', ' + corrected_address.address_line_2 + ', ' + corrected_address.city + ', ' + corrected_address.state;
         this.setState({
@@ -101,8 +101,8 @@ class PropertyAddress extends Component {
     componentDidMount() {
         const {inputValues: { address, city, state }} = this.props;
         let addr = address + ', ' + city + ', ' + state;
-        this.getLocationImage(address);
-        this.getMapImage(address);
+        this.getLocationImage(addr);
+        this.getMapImage(addr);
         if (this.props.inputValues.zip) {
             addr += ', ' + this.props.inputValues.zip;
         }
@@ -114,7 +114,7 @@ class PropertyAddress extends Component {
             this.setState({
                 is_address_valid: true,
             });
-            this.fetchProperty(this.props.inputValues.address, this.props.inputValues.city, this.props.inputValues.state);
+            this.fetchProperty(this.props.inputValues.address, this.props.inputValues.city, this.props.inputValues.state, this.props.inputValues.zip);
         } else {
             this.setState({
                 is_address_valid: false,
@@ -124,7 +124,7 @@ class PropertyAddress extends Component {
 
     fetchProperty(address, city, state) {
         const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
-        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + address + '&Address2="' + city + ', ' + state + '"', { headers })
+        fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + address + '&Address2=' + city + ', ' + state  , { headers })
             .then((res) => res.json())
             .then((json) => {
                 if (json.property && json.property.length > 0) {
