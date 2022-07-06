@@ -3,6 +3,7 @@ import { Form, Button, Col, Container, Row, Modal } from 'react-bootstrap';
 import loading from './../../assets/loading-icon.gif';
 import ProgressBar from './ProgressBar';
 import configData from './../../config.json';
+import Spinner from './../Spinner/Spinner';
 
 const photoStyle = {
     width: '600px',
@@ -24,6 +25,7 @@ class PropertyAddress extends Component {
             map_image: loading,
             is_property: false,
             is_address_valid: false,
+            is_loading: true,
         };
         
     }
@@ -123,6 +125,9 @@ class PropertyAddress extends Component {
     }
 
     fetchProperty(address, city, state) {
+        this.setState({
+            is_loading: true,
+        });
         const headers = { 'Content-Type': 'application/json', 'apikey': configData.ATOM_API_KEY };
         fetch("https://api.gateway.attomdata.com/propertyapi/v1.0.0/avm/detail?Address1=" + address + '&Address2=' + city + ', ' + state  , { headers })
             .then((res) => res.json())
@@ -153,14 +158,25 @@ class PropertyAddress extends Component {
                         is_property: false,
                     });
                 }
+                this.setState({
+                    is_loading: false,
+                });
             })
+            .catch((error) => {
+                console.log(error);
+                this.setState({
+                    is_loading: false,
+                });
+            }
+            );
     }
 
     render() {
         const {inputValues: { address, city, state }} = this.props;
         let complete_address = address;
 
-        return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto">           
+        return( <Container fluid='sm' className="p-md-5 w-md-75 m-auto"> 
+                    <Spinner show={this.state.is_loading}/>          
                     <p className="text-center text-dark m-0">Preparing cash offer for: <br/><b>{complete_address}</b></p>
                     <ProgressBar active={this.state.step} changeStep={this.props.changeStep}/>
                     <Row className=''>
